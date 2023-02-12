@@ -27,7 +27,7 @@ export const inputValidation = Yup.object().shape({
         if(val != '') {
             return Yup.string().matches(addressRegExp, 'Address can`t only use digit')
         }else{
-            return Yup.string().notRequired();
+            return Yup.string().optional();
         }
     }),
     remarks: Yup.string().optional()
