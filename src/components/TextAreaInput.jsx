@@ -1,7 +1,7 @@
 import { FormControl, FormErrorMessage, FormLabel, Textarea } from '@chakra-ui/react';
 import React from 'react';
 
-const TextAreaInput = ({ errorsName, errorsMessage, register, title, placeholder }) => {
+const TextAreaInput = ({ errorsName, errorsMessage, register, title, placeholder, value, onChange }) => {
     return (
         <div>
             <FormControl
@@ -19,6 +19,8 @@ const TextAreaInput = ({ errorsName, errorsMessage, register, title, placeholder
                     size={'md'}
                     placeholder={placeholder}
                     fontSize={{ base:'12px', sm:'14px', md:'16px' }}
+                    value={value}
+                    onChange={onChange}
                     {...register}
                 />
                 {errorsName && (
