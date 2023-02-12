@@ -13,6 +13,7 @@ const CardInput = ({ title, children }) => {
             borderBottomLeftRadius={'none'}
             borderLeft={{ base:'none',md:'8px' }}
             borderColor={'#222222'}
+            bg={'white'}
         >
             <CardHeader>
                 <Text

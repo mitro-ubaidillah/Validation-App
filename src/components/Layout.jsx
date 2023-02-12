@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
             alignContent={'center'}
             minHeight={'100vh'}
             width={'full'}
-            bg={'#fafafa'}
+            bg={'#ededed'}
         >
             {children}
         </Center>
