@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Flex, InputLeftAddon, Text, useToast } from '@chakra-ui/react';
@@ -17,9 +17,23 @@ const DonationPage = () => {
     const toast = useToast();
     const toastIdRef = useRef();
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const initialValues = {
+        name: '',
+        donation: null,
+        email: '',
+        id_number: '',
+        postal_code: '',
+        unit_number: '',
+        address: '',
+        remarks: '',
+    };
+
+    const [initialValue, setInitialValue] = useState(initialValues);
+
+    const { register, handleSubmit, formState: { errors }, setValue } = useForm({
         mode: 'onSubmit',
         resolver: yupResolver(inputValidation),
+        defaultValues: initialValue,
     });
 
     const SuccessToast = (data) => {
@@ -35,15 +49,28 @@ const DonationPage = () => {
     const closeToast = () => {
         if (toastIdRef.current) {
             toast.close(toastIdRef.current);
-
             setTimeout(() => {
                 navigate('/finish')
             }, 700)
+            setValue('name', '');
+            setValue('donation', null);
+            setValue('address', '');
+            setValue('email', '');
+            setValue('id_number', '');
+            setValue('postal_code', '');
+            setValue('unit_number', '');
         }
     }
 
     const onSubmit = (data) => {
         SuccessToast(data);
+        setValue('name', '');
+        setValue('donation', null);
+        setValue('address', '');
+        setValue('email', '');
+        setValue('id_number', '');
+        setValue('postal_code', '');
+        setValue('unit_number', '');
         setTimeout(() => {
             navigate('/finish')
         }, 3000)
@@ -63,6 +90,7 @@ const DonationPage = () => {
                         title={'Donation Amount'}
                         errorsName={errors.donation}
                         errorsMessage={errors.donation?.message}
+                        placeholder={'Your Nominal Donation'}
                         icon={
                             <InputLeftAddon
                                 color='gray.400'
@@ -85,6 +113,7 @@ const DonationPage = () => {
                                 title={'Name'}
                                 errorsName={errors.name}
                                 errorsMessage={errors.name?.message}
+                                placeholder={'Your Name'}
                             />
                         </Box>
                         <Box flexBasis={{ base: '100%', lg: '48%' }}>
@@ -93,6 +122,7 @@ const DonationPage = () => {
                                 title={'Email'}
                                 errorsName={errors.email}
                                 errorsMessage={errors.email?.message}
+                                placeholder={'Your Email'}
                             />
                         </Box>
                         <Box flexBasis={{ base: '100%', sm: '31%', lg: '32%' }}>
@@ -101,6 +131,7 @@ const DonationPage = () => {
                                 title={'ID Number'}
                                 errorsName={errors.id_number}
                                 errorsMessage={errors.id_number?.message}
+                                placeholder={'Your ID Number'}
                             />
                         </Box>
                         <Box flexBasis={{ base: '48%', sm: '31%', lg: '32%' }}>
@@ -109,6 +140,7 @@ const DonationPage = () => {
                                 title={'Postal Code'}
                                 errorsName={errors.postal_code}
                                 errorsMessage={errors.postal_code?.message}
+                                placeholder={'Your Postal Code'}
                             />
                         </Box>
                         <Box flexBasis={{ base: '48%', sm: '31%', lg: '32%' }}>
@@ -117,6 +149,7 @@ const DonationPage = () => {
                                 title={'Unit Number'}
                                 errorsName={errors.unit_number}
                                 errorsMessage={errors.unit_number?.message}
+                                placeholder={'Your Unit Number'}
                             />
                         </Box>
                         <Box flexBasis={{ base: '100%', lg: '48%' }}>
