@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import DonationApp from '../pages/DonationApp';
-import FinishDonationApp from '../pages/FinishDonationApp';
+import DonationApp from '../views/pages/DonationPage';
+import FinishDonationApp from '../views/pages/FinishDonationPage';
 
 const RouterApp = () => {
     return (

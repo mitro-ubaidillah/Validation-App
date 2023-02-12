@@ -1,40 +1,25 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import *  as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Button, Flex, InputLeftAddon, Text, useToast } from '@chakra-ui/react';
-import InputField from '../components/InputField';
-import CardInput from '../components/CardInput';
-import Layout from '../components/Layout';
-import { nricValidation } from '../validations/nricValidation';
-import TextAreaInput from '../components/TextAreaInput';
+import { Box, Flex, InputLeftAddon, Text, useToast } from '@chakra-ui/react';
+import InputField from '../../components/form/InputField';
+import CardInput from '../../components/card/CardInput';
+import Layout from '../../components/layouts/Layout';
+import TextAreaInput from '../../components/form/TextAreaInput';
 import { IoIosSend } from 'react-icons/io'
-import ButtonPrimary from '../components/ButtonPrimary';
+import ButtonPrimary from '../../components/button/ButtonPrimary';
 import { useNavigate } from 'react-router-dom';
-import ToastSuccess from '../components/ToastSuccess';
-import { inputValidation } from '../validations/InputValidaito';
+import ToastSuccess from '../../components/toast/ToastSuccess';
+import { inputValidation } from '../../validations/InputValidaito';
 
-const DonationApp = () => {
+const DonationPage = () => {
     const navigate = useNavigate();
     const toast = useToast();
     const toastIdRef = useRef();
 
-    const initialValues = {
-        donation: null,
-        name: '',
-        email: '',
-        id_number: '',
-        postal_code: '',
-        unit_number: '',
-        address: '',
-        remarks: ''
-    };
-
-
     const { register, handleSubmit, formState: { errors } } = useForm({
         mode: 'onSubmit',
         resolver: yupResolver(inputValidation),
-        defaultValues: initialValues
     });
 
     const SuccessToast = (data) => {
@@ -59,9 +44,9 @@ const DonationApp = () => {
 
     const onSubmit = (data) => {
         SuccessToast(data);
-        // setTimeout(() => {
-        //     navigate('/finish')
-        // }, 3000)
+        setTimeout(() => {
+            navigate('/finish')
+        }, 3000)
     }
 
 
@@ -168,4 +153,4 @@ const DonationApp = () => {
     );
 }
 
-export default DonationApp;
+export default DonationPage;
