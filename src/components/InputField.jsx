@@ -17,6 +17,8 @@ const InputField = ({ errorsName, title, register, errorsMessage, icon }) => {
             <InputGroup>
                 {icon}
                 <Input
+                    outline={''}
+                    _focus={{ borderColor:'#222222' }}                    
                     height={{ base:'30px', md:'40px' }}
                     border={'1px'}
                     borderColor={'gray.300'}

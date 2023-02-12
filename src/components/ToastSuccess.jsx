@@ -18,30 +18,37 @@ const ToastSuccess = ({ data, onClose }) => {
                 onClick={onClose}
                 cursor={'pointer'}
             >
-                <AiOutlineClose fontSize={'20px'} />
+                <AiOutlineClose fontSize={'18px'} />
             </Box>
             <Box
-                px={'10'}
-                pt={'10'}
+                px={{ base: '5', md: '10' }}
+                pt={{ base: '5', md: '10' }}
             >
                 <Text
-                    fontSize={'20px'}
+                    fontSize={{ base: '12px', sm: '16px', lg: '20px' }}
                     textAlign={'center'}
                     borderBottom={'1px'}
                 >
                     Send Data Success
                 </Text>
+                <Box>
+                    <Text
+                        fontSize={{ base: '18px', sm: '24px', lg: '30px' }}
+                        textAlign={'center'}
+                        fontWeight={'500'}
+                        pt={'5'}
+                    >
+                        Your Donation ${data.donation}
+                    </Text>
+                </Box>
                 <TableContainer
                     pt={'3'}
-                    px={'3'}
-                    pb={'10'}
+                    px={{ base: '2', lg: '3' }}
+                    pb={{ base: '4', lg: '10' }}
+                    fontSize={{ base: '12px', sm: '14px', lg: '16px' }}
                 >
                     <Table variant={'unstyled'}>
                         <Tbody>
-                            <Tr border={'none'}>
-                                <Td fontWeight={'500'}>Donation:</Td>
-                                <Td>{data.donation}</Td>
-                            </Tr>
                             <Tr>
                                 <Td fontWeight={'500'}>Name:</Td>
                                 <Td>{data.name}</Td>
@@ -62,10 +69,14 @@ const ToastSuccess = ({ data, onClose }) => {
                                 <Td fontWeight={'500'}>Unit Number:</Td>
                                 <Td>{data.unit_number}</Td>
                             </Tr>
-                            <Tr>
-                                <Td fontWeight={'500'}>Address:</Td>
-                                <Td>{data.address}</Td>
-                            </Tr>
+                            {
+                                data.address && (
+                                    <Tr>
+                                        <Td fontWeight={'500'}>Address:</Td>
+                                        <Td>{data.address}</Td>
+                                    </Tr>
+                                )
+                            }
                             {
                                 data.remarks && (
                                     <Tr>

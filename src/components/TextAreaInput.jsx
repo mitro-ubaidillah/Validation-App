@@ -18,6 +18,10 @@ const TextAreaInput = ({ errorsName, errorsMessage, register, title, placeholder
                 <Textarea
                     size={'md'}
                     placeholder={placeholder}
+                    outline={''}
+                    _focus={{ borderColor:'#222222' }}
+                    border={'1px'}    
+                    borderColor={'gray.300'}
                     fontSize={{ base:'12px', sm:'14px', md:'16px' }}
                     value={value}
                     onChange={onChange}

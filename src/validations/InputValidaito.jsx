@@ -2,7 +2,8 @@ import * as Yup from 'yup';
 import { nricValidation } from './nricValidation';
 
 const unitNumberRegExp = /[0-9]{2}-[0-9a-zA-Z]{2}/g;
-const addressRegExp = /[a-zA-Z][0-9]$/;
+const addressRegExp = /[a-zA-Z][0-9]*/;
+const postalCodeRegExp = /[0-9]/;
 
 export const inputValidation = Yup.object().shape({
     name: Yup.string().required(),
@@ -20,20 +21,12 @@ export const inputValidation = Yup.object().shape({
         }
     }
     ).required(),
-    postal_code: Yup.string().min(6, 'Min length 6 digit').required(),
+    postal_code: Yup.string().min(6, 'Min length 6 digit').max(6, 'Out of range').matches(postalCodeRegExp, 'Only number area').required(),
     unit_number: Yup.string().matches(unitNumberRegExp, `Must contain a number(or letter) and hyphen symbol`).max(6, 'Max length 6 digit').required(),
-    // address: Yup.string().when('address', (val, schema) => {
-    //     if(val?.length > 0) {
-    //         return Yup.string().matches(addressRegExp, 'Address can`t only use digit').required()
-    //     }else{
-    //         return Yup.string().notRequired();
-    //     }
-    // }),
-    address: Yup.string().when("address", (val, schema) => {
-        console.log(val.length)
-        if (val?.length > 0) {  //if address exist then apply min max else not
-            return Yup.string().min(5, "min 5").max(255, "max 255").required("Required");
-        } else {
+    address: Yup.string().when('address', (val, schema) => {
+        if(val != '') {
+            return Yup.string().matches(addressRegExp, 'Address can`t only use digit')
+        }else{
             return Yup.string().notRequired();
         }
     }),

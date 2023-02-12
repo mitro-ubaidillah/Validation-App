@@ -19,28 +19,49 @@ const DonationApp = () => {
     const toast = useToast();
     const toastIdRef = useRef();
 
+    const initialValues = {
+        donation: null,
+        name: '',
+        email: '',
+        id_number: '',
+        postal_code: '',
+        unit_number: '',
+        address: '',
+        remarks: ''
+    };
+
+
     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(inputValidation)
+        mode: 'onSubmit',
+        resolver: yupResolver(inputValidation),
+        defaultValues: initialValues
     });
 
     const SuccessToast = (data) => {
         toastIdRef.current = toast({
             position: 'top',
-            duration: 1500,
+            duration: 2000,
             render: () => (
-                <ToastSuccess data={data} onClose={()=>closeToast()} />
+                <ToastSuccess data={data} onClose={() => closeToast()} />
             )
         })
     }
 
     const closeToast = () => {
-        if(toastIdRef.current) {
+        if (toastIdRef.current) {
             toast.close(toastIdRef.current);
+
+            setTimeout(() => {
+                navigate('/finish')
+            }, 700)
         }
     }
 
     const onSubmit = (data) => {
         SuccessToast(data);
+        // setTimeout(() => {
+        //     navigate('/finish')
+        // }, 3000)
     }
 
 
@@ -89,7 +110,7 @@ const DonationApp = () => {
                                 errorsMessage={errors.email?.message}
                             />
                         </Box>
-                        <Box flexBasis={{ base: '30%', lg: '32%' }}>
+                        <Box flexBasis={{ base: '100%', sm: '31%', lg: '32%' }}>
                             <InputField
                                 register={register('id_number')}
                                 title={'ID Number'}
@@ -97,7 +118,7 @@ const DonationApp = () => {
                                 errorsMessage={errors.id_number?.message}
                             />
                         </Box>
-                        <Box flexBasis={{ base: '30%', lg: '32%' }}>
+                        <Box flexBasis={{ base: '48%', sm: '31%', lg: '32%' }}>
                             <InputField
                                 register={register('postal_code')}
                                 title={'Postal Code'}
@@ -105,7 +126,7 @@ const DonationApp = () => {
                                 errorsMessage={errors.postal_code?.message}
                             />
                         </Box>
-                        <Box flexBasis={{ base: '30%', lg: '32%' }}>
+                        <Box flexBasis={{ base: '48%', sm: '31%', lg: '32%' }}>
                             <InputField
                                 register={register('unit_number')}
                                 title={'Unit Number'}
