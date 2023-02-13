@@ -10,7 +10,7 @@ import { IoIosSend } from 'react-icons/io'
 import ButtonPrimary from '../../components/button/ButtonPrimary';
 import { useNavigate } from 'react-router-dom';
 import ToastSuccess from '../../components/toast/ToastSuccess';
-import { inputValidation } from '../../validations/InputValidaito';
+import { inputValidation } from '../../utils/validations/InputValidaito';
 
 const DonationPage = () => {
     const navigate = useNavigate();
